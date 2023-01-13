@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import { TextInput, Card, Text } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import axios from '../axios'
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
   const [sessions, setSessions] = useState([])
@@ -30,7 +31,8 @@ export default function Landing() {
         <div className='grid grid-cols-12 gap-5 mt-8'>
         {sessions.map((session, index) => {
           return (
-            <Card className='xl:col-span-3 lg:col-span-4 md:col-span-6 col-span-12' shadow="sm" p="lg" radius="md" withBorder>
+            <Link className='xl:col-span-3 lg:col-span-4 md:col-span-6 col-span-12' to={`/session/${session.ID}`}>
+            <Card className='cursor-pointer h-full' shadow="sm" p="lg" radius="md" withBorder>
               <Card.Section>
                 <img
                   src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
@@ -43,6 +45,7 @@ export default function Landing() {
                 {session.author}
               </Text>
             </Card>
+            </Link>
           )
         })}
         </div>

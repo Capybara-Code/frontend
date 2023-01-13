@@ -1,3 +1,3 @@
 import axios from 'axios';
-const instance = axios.create({ baseURL: 'http://172.17.227.71:8080' })
+const instance = axios.create({ baseURL: 'https://capydemy.fly.dev' })
 export default instance

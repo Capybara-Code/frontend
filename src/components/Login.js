@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../assets/capy.svg'
+import logo from '../assets/capy2.svg'
 import { TextInput, PasswordInput, SegmentedControl, Chip } from '@mantine/core'
 import axios from '../axios'
 import { setUserInfo } from '../app/slices/authSlice'

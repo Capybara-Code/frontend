@@ -4,29 +4,36 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     token: '',
-    name: '',
     _id: '',
     email: '',
+    username: '',
+    isTutor: false
   },
   reducers: {
     initialiseStore: state => {
       if (localStorage.getItem('token')) {
         state.token = localStorage.getItem('token')
-        state.name = localStorage.getItem('name')
         state._id = localStorage.getItem('_id')
+        state.username = localStorage.getItem('username')
         state.email = localStorage.getItem('email')
+        state.isTutor = localStorage.getItem('isTutor')
+        state.interests = localStorage.getItem('interests')
       } else {
         state.token = ''
-        state.name = ''
         state._id = ''
         state.email = ''
+        state.username = ''
+        state.isTutor = false
+        state.interests = ''
       }
     },
     setUserInfo: (state, action) => {
       state.token = action.payload.token
-      state.name = action.payload.data.name
-      state._id = action.payload.data._id
-      state.email = action.payload.data.email
+      state.username = action.payload.user.user_id
+      state._id = action.payload.user._id
+      state.email = action.payload.user.email
+      state.isTutor = action.payload.user.is_tutor
+      state.interests = action.payload.user.interests
     },
     logout: state => {
       if (localStorage.getItem('token')) {

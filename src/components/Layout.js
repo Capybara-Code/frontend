@@ -14,6 +14,7 @@ export default function Layout({children}) {
   const [loginOpened, setLoginOpened] = useState(false)
   const [drawerOpened, setDrawerOpened] = useState(false)
   const [capyQuote, setCapyQuote] = useState("")
+  const [helpModalShowing, showHelpModal] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,7 +33,15 @@ export default function Layout({children}) {
       <p className='mr-3 text-sm text-slate-500'>{auth.username.slice(0,20)}</p>
     </div>
     : null}
-    <IconQuestionCircle className='cursor-pointer fixed bottom-0 right-0 m-5 z-10' size={40} />
+    <IconQuestionCircle onClick={() => showHelpModal(true)} className='cursor-pointer fixed bottom-0 right-0 m-5 z-10' size={40} />
+    <Modal
+    centered
+    opened={helpModalShowing}
+    onClose={() => showHelpModal(false)}
+    title="Help will always be given at Capydemy to those who click the thingy in the corner."
+    size="xl">
+      lorem ipsum.
+    </Modal>
     <Modal
       centered
       opened={loginOpened}
@@ -92,6 +101,9 @@ export default function Layout({children}) {
               <img src={logo} alt="logo" />
               <h1 className='xl:text-3xl text-xl font-bold'>capydemy</h1>
             </span>
+            {auth.token?
+            <p className='text-center text-slate-500 font-light'>{auth.isTutor === "true" ? "Tutor" : "Student"}</p>
+            :null}
             {auth.token ?
             <div className='flex flex-col gap-3 mt-10'>
               <NavLink to="/" style={({ isActive }) => ({ background: isActive ? "rgb(230, 138, 60)" : "white", color: isActive ? "white" : "black"})} className='navlink text-center rounded-full p-2'>

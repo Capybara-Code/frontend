@@ -6,6 +6,8 @@
     "@emotion/react": "^11.10.5",
     "@mantine/core": "^5.10.0",
     "@mantine/hooks": "^5.10.0",
+    "@netless/fastboard": "^0.3.7",
+    "@netless/window-manager": "^0.4.55",
     "@reduxjs/toolkit": "^1.9.1",
     "@tabler/icons": "^1.119.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -18,7 +20,8 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "white-web-sdk": "^2.16.41"
   },
   "scripts": {
     "start": "react-scripts start",

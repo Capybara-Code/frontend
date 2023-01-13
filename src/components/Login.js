@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../assets/capy.svg'
-import { TextInput, PasswordInput, SegmentedControl } from '@mantine/core'
+import { TextInput, PasswordInput, SegmentedControl, Chip } from '@mantine/core'
 import axios from '../axios'
 import { setUserInfo } from '../app/slices/authSlice'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,7 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [userID, setUserID] = useState("")
   const [password, setPassword] = useState("")
-  const [interests, setInterests] = useState("")
+  const [interests, setInterests] = useState([])
   const [checkPassword, setCheckPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -26,7 +26,7 @@ export default function Login() {
         email: email,
         password: password,
         isTutor: isTutor === "true",
-        interests: interests
+        interests: interests.join(",")
       })
       localStorage.setItem("token", res.data.token)
       localStorage.setItem("username", res.data.user.user_id)
@@ -146,6 +146,20 @@ export default function Login() {
           { label: 'Tutor', value: 'true' },
         ]}
       />
+      <Chip.Group className='mt-8' multiple={true} value={interests} onChange={setInterests}>
+        <Chip value="mlai">ML/AI</Chip>
+        <Chip value="webdev">Web Dev</Chip>
+        <Chip value="gamedev">Game Dev</Chip>
+        <Chip value="osdev">OS Dev</Chip>
+        <Chip value="uiux">UI/UX</Chip>
+        <Chip value="graphics">Graphic Design</Chip>
+        <Chip value="security">Security</Chip>
+        <Chip value="ar">AR</Chip>
+        <Chip value="blockchain">Blockchain</Chip>
+        <Chip value="appdev">App Dev</Chip>
+        <Chip value="dsa">DSA</Chip>
+        <Chip value="graph">Graph Theory</Chip>
+      </Chip.Group>
       <button style={{background: "rgb(230, 138, 60)"}} className='mx-auto lg:w-4/12 md:w-7/12 w-full flex justify-center mt-6 text-xl text-center rounded-full p-2 text-white'>
         {loading ? <Loader /> : "Register"}
       </button>

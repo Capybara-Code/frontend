@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
-import { TextInput, Card, Text, Modal } from '@mantine/core';
+import { TextInput, Card, Text, Modal, Textarea } from '@mantine/core';
 import { IconSearch, IconPlus } from '@tabler/icons';
 import axios from '../axios'
 import scene from '../assets/scene.svg'
@@ -23,6 +23,9 @@ export default function Landing() {
   const [sessionInFocus, setSessionInFocus] = useState({})
   const [showPaymentButton, setShowPaymentButton] = useState(true)
   const [walletLoading, setWalletLoading] = useState(false)
+  const [showingNewSessionModal, setShowingNewSessionModal] = useState(false)
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
 
   const [accountAddress, setAccountAddress] = useState("")
   const isConnectedToPeraWallet = !!accountAddress;
@@ -109,6 +112,16 @@ export default function Landing() {
     peraWallet.disconnect();
     setAccountAddress(null);
   }
+
+  const submitSession = async () => {
+    await axios.post("/courses", {
+      course_name: title,
+      author: localStorage.getItem("username"),
+      description: description,
+      author_pk: accountAddress
+    })
+    window.location.reload()
+  }
   return (
     <Layout>
       <Modal
@@ -138,6 +151,44 @@ export default function Landing() {
             </button>
             </Link>
             )}
+          </div>
+        </div>
+      </Modal>
+      <Modal
+      centered
+      opened={showingNewSessionModal}
+      onClose={() => setShowingNewSessionModal(false)}
+      title="Have a new listing in mind?"
+      size="xl"
+      >
+        <div className="flex flex-col">
+          <div>
+            <form onSubmit={(e) => {e.preventDefault();submitSession();}} className='w-full flex flex-col'>
+              <TextInput
+                placeholder="How do you even connect algorand to pera"
+                label="Session Title"
+                required
+                className='mt-8'
+                classNames={{input: "border-slate-300", label: "text-slate-500"}}
+                value={title}
+                onChange={(event) => setTitle(event.currentTarget.value)}
+              />
+              <Textarea
+                placeholder="lorem ipsum dolor sit amet"
+                label="Description"
+                withAsterisk
+                classNames={{input: "border-slate-300", label: "text-slate-500"}}
+                value={description}
+                className="mt-4"
+                onChange={(event) => setDescription(event.currentTarget.value)}
+              />
+              <button type='button' onClick={handleConnectWalletClick} className='navlink text-black px-4 text-sm w-fit flex justify-center mt-6 text-xl flex justify-center text-center rounded-full p-2 text-white'>
+              {isConnectedToPeraWallet ? "Wallet Connected" : "Connect your Pera Wallet"}
+              </button>
+              <button type='submit' style={{background: "rgb(230, 138, 60)"}} className='mx-auto lg:w-4/12 md:w-7/12 w-full flex justify-center mt-6 text-xl text-center rounded-full p-2 text-white'>
+                Create
+              </button>
+            </form>
           </div>
         </div>
       </Modal>
@@ -179,7 +230,7 @@ export default function Landing() {
           <div className="rounded-md mt-8 bg-white drop-shadow-lg p-5">
           <span className='flex flex-wrap gap-4 justify-between'>
           <h2 className='lg:text-2xl text-xl'>Your Sessions</h2>
-          <button style={{color: "rgb(230, 138, 60)"}} className='px-4 navlink flex justify-center text-xl text-center rounded-full p-2 text-white'>Create New</button>
+          <button onClick={() => setShowingNewSessionModal(true)} style={{color: "rgb(230, 138, 60)"}} className='px-4 navlink flex justify-center text-xl text-center rounded-full p-2 text-white'>Create New</button>
           </span>
           <div className='flex gap-5 mt-8 overflow-scroll flex-nowrap'>
           {yourSessions.map((session, index) => {
@@ -202,7 +253,7 @@ export default function Landing() {
             )
           })}
           <div className='xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem]'>
-            <Card className='add-card cursor-pointer h-full xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem] flex justify-center items-center' shadow="sm" p="lg" radius="md" withBorder>
+            <Card onClick={() => setShowingNewSessionModal(true)} className='add-card cursor-pointer h-full xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem] flex justify-center items-center' shadow="sm" p="lg" radius="md" withBorder>
               <IconPlus color='rgb(230, 138, 60)' size={100} />
             </Card>
           </div>

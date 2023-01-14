@@ -8,6 +8,7 @@ import capychill from '../assets/capywater.png'
 import Login from './Login'
 import { logout } from '../app/slices/authSlice'
 import axios from '../axios'
+import { Link } from 'react-router-dom'
 
 export default function Layout({children}) {
   const auth = useSelector(state => state.auth)
@@ -40,7 +41,7 @@ export default function Layout({children}) {
     onClose={() => showHelpModal(false)}
     title="Help will always be given at Capydemy to those who click the thingy in the corner."
     size="xl">
-      lorem ipsum.
+      Welcome to Capydemy, an secure, private and anonymised education platform. Sign in either as a Student or a Tutor, and attend/create one-on-one tutoring sessions, while being assured of your security, and of the the tutor's credentials. Payments for sessions are quick and easy through our very own fiat currency, <strong>CoinBara</strong>, on the Algorand network. Check out the code at <a href={"https://github.com/Capybara-Code"}>https://github.com/Capybara-Code</a>
     </Modal>
     <Modal
       centered

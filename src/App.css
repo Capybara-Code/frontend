@@ -1,4 +1,5 @@
-.navlink:hover {
+.navlink:hover,
+.add-card:hover {
   background-color: rgba(230, 138, 60, 0.2) !important;
 }
 

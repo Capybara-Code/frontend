@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
 import { Provider } from 'react-redux';
 import {store} from './app/store'
+import { NotificationsProvider } from '@mantine/notifications';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     <Provider store={store}>
-    <MantineProvider>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <NotificationsProvider>
     <App />
+    </NotificationsProvider>
     </MantineProvider>
     </Provider>
   // </React.StrictMode>

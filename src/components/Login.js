@@ -5,6 +5,7 @@ import axios from '../axios'
 import { setUserInfo } from '../app/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import { Loader } from '@mantine/core'
+import { showNotification } from '@mantine/notifications'
 
 export default function Login() {
   const [login, setLogin] = useState(true)
@@ -25,7 +26,7 @@ export default function Login() {
         user_id: userID,
         email: email,
         password: password,
-        isTutor: isTutor === "true",
+        is_tutor: isTutor === "true",
         interests: interests.join(",")
       })
       localStorage.setItem("token", res.data.token)
@@ -40,6 +41,12 @@ export default function Login() {
     } catch {
       console.log("oops?")
       setLoading(false)
+      showNotification({
+        title: 'Oops',
+        message: 'There was an error signing you up. 🤥',
+        color:"red",
+        autoClose: 5000,
+      })
     }
   }
   const startlogin = async () => {
@@ -61,6 +68,12 @@ export default function Login() {
     } catch {
       console.log("oops?")
       setLoading(false)
+      showNotification({
+        title: 'Oops',
+        message: 'There was an error logging you in. 🤥',
+        color:"red",
+        autoClose: 5000,
+      })
     }
   }
   return (

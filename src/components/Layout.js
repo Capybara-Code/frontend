@@ -75,7 +75,7 @@ export default function Layout({children}) {
         <NavLink to="notes" style={({ isActive }) => ({ background: isActive ? "rgb(230, 138, 60)" : "white", color: isActive ? "white" : "black"})} className='navlink text-center rounded-full p-2 bg-white'>
           Notes
         </NavLink>
-        <button onClick={() => dispatch(logout())} className='logout flex justify-center text-red-500 mx-auto w-full flex mt-6 text-center rounded-full p-2 text-white'>
+        <button onClick={() => dispatch(logout())} className='logout flex justify-center text-red-500 mx-auto w-full flex mt-6 text-center rounded-full p-2'>
           Logout
         </button>
       </div>
@@ -121,7 +121,7 @@ export default function Layout({children}) {
               <NavLink to="/notes" style={({ isActive }) => ({ background: isActive ? "rgb(230, 138, 60)" : "white", color: isActive ? "white" : "black"})} className='navlink text-center rounded-full p-2 bg-white'>
                 Notes
               </NavLink>
-              <button onClick={() => dispatch(logout())} className='logout flex justify-center text-red-500 mx-auto w-full flex mt-6 text-center rounded-full p-2 text-white'>
+              <button onClick={() => dispatch(logout())} className='logout flex justify-center text-red-500 mx-auto w-full flex mt-6 text-center rounded-full p-2'>
                 Logout
               </button>
             </div>

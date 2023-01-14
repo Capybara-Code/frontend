@@ -24,7 +24,7 @@ async function mountFastboard(div) {
             region: "in-mum",
         },
         joinRoom: {
-            uid: "sjdjsdkjksajdks",
+            uid: localStorage.getItem("username"),
             uuid: "802e8a20936f11ed86a26bf46008d7bd",
             roomToken: "NETLESSROOM_YWs9Y0NRSURxbDBRTXlETXF1aCZub25jZT01NmY0NTlhYy0zOWRhLTQyMTMtOGFkYS04OGY2ZTk3MWNiOGMmcm9sZT0wJnNpZz1hMDhlNTM2MDY4ZTk0MjkzNTBhMGJjYTBlMzBjMTY0MTNhZWJmNTU2ODk4Y2E1OWEzNDA1ZGY0YWFhY2IwNGRjJnV1aWQ9ODAyZThhMjA5MzZmMTFlZDg2YTI2YmY0NjAwOGQ3YmQ",
         },
@@ -41,7 +41,7 @@ async function mountFastboard(div) {
   return (
     <Layout>
     <div>Session</div>
-    <div id="board" className='h-[20rem] w-auto'></div>
+    <div id="board" className='h-[40rem] w-auto'></div>
     </Layout>
   )
 }

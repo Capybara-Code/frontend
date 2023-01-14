@@ -180,8 +180,8 @@ export default function Landing() {
           <div className='flex gap-5 mt-8 overflow-scroll flex-nowrap'>
           {yourSessions.map((session, index) => {
             return (
-              <div className='xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem]' to={`/session/${session.ID}`}>
-              <Card onClick={() => showSession(session)} className='cursor-pointer h-full xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem]' shadow="sm" p="lg" radius="md" withBorder>
+              <Link className='xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem]' to={`/session/${session.ID}`}>
+              <Card className='cursor-pointer h-full xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem]' shadow="sm" p="lg" radius="md" withBorder>
                 <Card.Section>
                   <img
                     src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
@@ -194,7 +194,7 @@ export default function Landing() {
                   {session.author}
                 </Text>
               </Card>
-              </div>
+              </Link>
             )
           })}
           <div className='xl:w-[20rem] lg:w-[15rem] md:w-[20rem] w-[15rem]'>

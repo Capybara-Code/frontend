@@ -81,7 +81,7 @@ export default function Layout({children}) {
       </div>
       : (
         <div onClick={() => setLoginOpened(true)} className='flex flex-col gap-5 mt-10'>
-        <NavLink style={{background: "rgb(230, 138, 60)"}} className='text-center rounded-full p-2 text-white'>
+        <NavLink onClick={() => setDrawerOpened(false)} style={{background: "rgb(230, 138, 60)"}} className='text-center rounded-full p-2 text-white'>
           Login/Register
         </NavLink>
         </div>

@@ -5,4 +5,4 @@ Anirudh Mishra
 Sankhayan Bhattacharjee
 Tanushree Madaan
 
-Live: https://frontend-kohl-beta.vercel.app/
+Live: https://capydemy.vercel.app/

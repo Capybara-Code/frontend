@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import {PeraWalletConnect} from "@perawallet/connect"
 import {Transaction, Algodv2, makeAssetTransferTxnWithSuggestedParamsFromObject, generatePaymentTxns} from "algosdk";
 import { Link } from 'react-router-dom';
+import { Loader } from '@mantine/core';
 
 const peraWallet = new PeraWalletConnect({
   chainId: 416002,
@@ -21,6 +22,7 @@ export default function Landing() {
   const [showingSessionModal, setShowingSessionModal] = useState(false)
   const [sessionInFocus, setSessionInFocus] = useState({})
   const [showPaymentButton, setShowPaymentButton] = useState(true)
+  const [walletLoading, setWalletLoading] = useState(false)
 
   const [accountAddress, setAccountAddress] = useState("")
   const isConnectedToPeraWallet = !!accountAddress;
@@ -48,6 +50,7 @@ export default function Landing() {
   }
 
   const handleTransaction = async (toAddr) => {
+    setWalletLoading(true)
     const txnDetails = await generateAssetTransferTxns({initiatorAddr:accountAddress, assetID:153818468, to:toAddr})
     
     try {
@@ -61,6 +64,7 @@ export default function Landing() {
     } catch (error) {
       console.log("Couldn't sign asset transfer txns",error);
     }
+    setWalletLoading(false)
   }
 
   const auth = useSelector(state => state.auth)
@@ -124,8 +128,8 @@ export default function Landing() {
               <p className="mt-2 text-slate-500 lg:text-lg text-md">{sessionInFocus.author}</p>
             </div>
             {showPaymentButton ?
-            <button onClick={isConnectedToPeraWallet ? () => handleTransaction(sessionInFocus.author_pk) : handleConnectWalletClick} style={{background: "rgb(230, 138, 60)"}} className='mx-auto absolute bottom-0 w-fit right-0 flex justify-center mt-6 text-xl text-center rounded-full p-2 text-white'>
-            {isConnectedToPeraWallet ? "Pay 0.5 CoinBara" : "Connect to Pera"}
+            <button onClick={isConnectedToPeraWallet ? () => handleTransaction(sessionInFocus.author_pk) : handleConnectWalletClick} style={{background: "rgb(230, 138, 60)"}} className='mx-auto absolute bottom-0 w-fit right-0 flex justify-center mt-6 text-xl flex justify-center text-center rounded-full p-2 text-white'>
+            {walletLoading ? <Loader /> : isConnectedToPeraWallet ? "Pay 0.5 CoinBara" : "Connect to Pera"}
             </button>
             : (
               <Link to={`/session/${sessionInFocus.ID}`}>
